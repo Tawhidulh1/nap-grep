@@ -5,11 +5,14 @@
 void help();
 int main(int argc, char *argv[]) {
   int opt;
-  while ((opt = getopt(argc, argv, "h")) != -1) {
+  while ((opt = getopt(argc, argv, "h"))) {
     switch (opt) {
     case ('h'):
       help();
       break;
+    default:
+      help();
+      return 0;
     }
   }
   return 0;
@@ -18,5 +21,5 @@ int main(int argc, char *argv[]) {
 void help() {
   printf("Usage: nap-grep [-h]\n");
   printf("Options:\n");
-  printf("-h\n");
+  printf("-h");
 }
