@@ -1,23 +1,22 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 void help();
 int main(int argc, char *argv[]) {
-  int i;
-  for (i = 1; i < argc; i++) {
-    if (sizeof(argv[i]) < 2) {
-      continue;
-    }
-    char firstChar = argv[i][0];
-    char secondChar = argv[i][1];
-    if (firstChar == '-') {
-      switch (secondChar) {
-      case ('h'):
-        help();
-      }
+  int opt;
+  while ((opt = getopt(argc, argv, "h")) != -1) {
+    switch (opt) {
+    case ('h'):
+      help();
+      break;
     }
   }
-
   return 0;
 }
 
-void help() { printf("printing help\n"); }
+void help() {
+  printf("Usage: nap-grep [-h]\n");
+  printf("Options:\n");
+  printf("-h\n");
+}
