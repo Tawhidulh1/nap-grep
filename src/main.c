@@ -5,14 +5,11 @@
 void help();
 int main(int argc, char *argv[]) {
   int opt;
-  while ((opt = getopt(argc, argv, "h"))) {
+  while ((opt = getopt(argc, argv, "h")) != -1) {
     switch (opt) {
     case ('h'):
       help();
       break;
-    default:
-      help();
-      return 0;
     }
   }
   return 0;
