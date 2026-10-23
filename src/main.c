@@ -12,6 +12,16 @@ int main(int argc, char *argv[]) {
       break;
     }
   }
+  char *val = NULL;
+  val = argv[optind];
+  if (val != NULL) {
+  }
+
+  /*
+  int i;
+  for (i = optind; i < argc; i++) {}
+  */
+
   return 0;
 }
 
@@ -19,4 +29,5 @@ void help() {
   printf("Usage: nap-grep [-h]\n");
   printf("Options:\n");
   printf("-h");
+  exit(0);
 }
