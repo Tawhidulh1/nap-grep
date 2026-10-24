@@ -2,13 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-int search_for_files_containing(char *str, char *directory);
-int main() {
-  char *str = "value";
-  search_for_files_containing(str, ".");
-  return 0;
-}
-
 int search_for_files_containing(char *str, char *directory) {
   DIR *workingDir = opendir(directory);
   if (workingDir == NULL) {

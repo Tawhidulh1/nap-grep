@@ -1,3 +1,4 @@
+#include "search.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -15,6 +16,7 @@ int main(int argc, char *argv[]) {
   char *val = NULL;
   val = argv[optind];
   if (val != NULL) {
+    search_for_files_containing(val, ".");
   }
 
   /*
