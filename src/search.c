@@ -28,7 +28,18 @@ int search_for_files_containing(char *str, char *directory) {
       dirp = readdir(workingDir);
       continue;
     }
-    printf("%s\n", path);
+    FILE *fp;
+    fp = fopen(path, "r");
+    if (fp == NULL) {
+      return 1;
+    }
+    char line[1024];
+    while (fgets(line, sizeof(line), fp) != NULL) {
+      if (strstr(line, str) != NULL) {
+        printf("%s\n", path);
+      }
+    }
+    fclose(fp);
     dirp = readdir(workingDir);
   }
   closedir(workingDir);
