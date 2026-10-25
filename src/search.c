@@ -1,7 +1,11 @@
 #include "search.h"
+#include "colors.h"
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
+
+#define RED "\033[31m"
+#define RESET "\033[0m"
 
 int hideDotfiles = 1;
 
@@ -38,6 +42,10 @@ int search_for_files_containing(char *str, char *directory) {
       continue;
     }
 
+    if (dirp->d_type == DT_LNK) {
+      dirp = readdir(workingDir);
+      continue;
+    }
     char path[4096];
     snprintf(path, sizeof(path), "%s/%s", directory, dirp->d_name);
     // Update this later:
@@ -57,7 +65,10 @@ int search_for_files_containing(char *str, char *directory) {
     while (fgets(line, sizeof(line), fp) != NULL) {
       char *pChar = strstr(line, str);
       if (pChar != NULL) {
-        printf("%s: %s\n", path, line);
+        char *pLine = line;
+        printf("%s: ", path);
+        printWithHighlight(line, pChar - pLine,
+                           (pChar - pLine) + strlen(str) - 1, RED);
       }
     }
     fclose(fp);
