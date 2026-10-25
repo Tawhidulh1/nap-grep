@@ -55,5 +55,6 @@ dkms.conf
 *.dwo
 
 # nap-grep executable
+build/
 nap-grep*
 ng*
