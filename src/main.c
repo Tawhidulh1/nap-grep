@@ -13,16 +13,19 @@ int main(int argc, char *argv[]) {
       break;
     }
   }
+  int numDirs = argc - optind - 1;
+  char **dirs = &argv[optind + 1];
+
   char *val = NULL;
   val = argv[optind];
   if (val != NULL) {
-    search_for_files_containing(val, ".");
+    if (numDirs == 0) {
+      search_for_files_containing(val, ".");
+    } else {
+      search(val, dirs, numDirs);
+    }
+    // search_for_files_containing(val, ".");
   }
-
-  /*
-  int i;
-  for (i = optind; i < argc; i++) {}
-  */
 
   return 0;
 }

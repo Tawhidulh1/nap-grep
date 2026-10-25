@@ -1,18 +1,32 @@
+#include "search.h"
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
 
+int search(char *str, char **dirs, int numDirs) {
+  int i;
+  for (i = 0; i < numDirs; i++) {
+    char *dir = dirs[i];
+    search_for_files_containing(str, dir);
+  }
+  return 0;
+}
+
 int search_for_files_containing(char *str, char *directory) {
   DIR *workingDir = opendir(directory);
+
   if (workingDir == NULL) {
     return 1;
   }
+
   struct dirent *dirp = readdir(workingDir);
+
   while (dirp != NULL) {
     if (strcmp(dirp->d_name, ".") == 0 || strcmp(dirp->d_name, "..") == 0) {
       dirp = readdir(workingDir);
       continue;
     }
+
     char path[4096];
     snprintf(path, sizeof(path), "%s/%s", directory, dirp->d_name);
     // Update this later:
@@ -21,15 +35,18 @@ int search_for_files_containing(char *str, char *directory) {
       dirp = readdir(workingDir);
       continue;
     }
+
     FILE *fp;
     fp = fopen(path, "r");
     if (fp == NULL) {
       return 1;
     }
+
     char line[1024];
     while (fgets(line, sizeof(line), fp) != NULL) {
-      if (strstr(line, str) != NULL) {
-        printf("%s\n", path);
+      char *pChar = strstr(line, str);
+      if (pChar != NULL) {
+        printf("%s: %s\n", path, line);
       }
     }
     fclose(fp);
