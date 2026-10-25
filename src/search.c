@@ -3,7 +3,14 @@
 #include <stdio.h>
 #include <string.h>
 
-int search(char *str, char **dirs, int numDirs) {
+int hideDotfiles = 1;
+
+int search(char *str, char **dirs, int numDirs, int dotfilesHidden) {
+  hideDotfiles = dotfilesHidden;
+  if (numDirs == 0) {
+    search_for_files_containing(str, ".");
+    return 0;
+  }
   int i;
   for (i = 0; i < numDirs; i++) {
     char *dir = dirs[i];
@@ -23,6 +30,10 @@ int search_for_files_containing(char *str, char *directory) {
 
   while (dirp != NULL) {
     if (strcmp(dirp->d_name, ".") == 0 || strcmp(dirp->d_name, "..") == 0) {
+      dirp = readdir(workingDir);
+      continue;
+    }
+    if (hideDotfiles && dirp->d_name[0] == '.') {
       dirp = readdir(workingDir);
       continue;
     }
