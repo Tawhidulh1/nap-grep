@@ -22,8 +22,8 @@ sudo make install PREFIX=/usr/local
 ### Usage
 The Pattern must be the first value other than the OPTIONS and the FLAGS. After the pattern, the ordering do not matter since getopt_long does non-posix rearrangement for argv.
 ```bash
-./ng PATTERN [DIRS] [OPTIONS] [FLAGS]
-# ex: ./ng "Hello World" ~/ / --hidden
+ng PATTERN [DIRS] [OPTIONS] [FLAGS]
+# ex: ng "Hello World" ~/ / --hidden
 ```
 *the --hidden above makes it so that hidden files and directories are included (those that begin in ".")*
 
