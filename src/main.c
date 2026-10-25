@@ -33,8 +33,25 @@ int main(int argc, char *argv[]) {
 }
 
 void help() {
-  printf("Usage: nap-grep [-h]\n");
-  printf("Options:\n");
-  printf("-h");
+  char *help =
+      "nap-grep\n"
+      "Tawhidul Hasan <Tawhidulh1@gmail.com>\n"
+      "\n"
+      "nap-grep(ng) is a tool that recursively searches directories (defaulted "
+      "to the current directory)\n and looks for a pattern.\n"
+      "\n"
+      "Project git page: https://github.com/tawhidulh1/nap-grep\n"
+      "\n"
+      "USAGE: \n"
+      "	ng PATTERN [DIRS] [OPTIONS] [FLAGS]\n"
+      "\n"
+      "POSITIONAL ARGUMENTS:\n"
+      "	<PATTERN>	An expression that can be expressed as a String that "
+      "is used for searching\n"
+      "	<DIRS>		A(n)(optional) directory to search in\n"
+      "\n"
+      "EXTRA:\n"
+      "	-h or --help	Brings up help message\n";
+  printf("%s", help);
   exit(0);
 }
