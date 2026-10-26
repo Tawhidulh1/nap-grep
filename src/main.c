@@ -6,8 +6,19 @@
 
 void help();
 int main(int argc, char *argv[]) {
+  char *ngLogo = "\033[34m\n"
+                 " ▀▄▄▄▄▄▄▄▀     ▀▄▄▄▄▄▄▄▀ \n"
+                 "██▓██▀██▓██   ██▓██▀██▓██\n"
+                 "█▓▒▓     ▓▒▓█ █▓▒▓     ▓▒▓█\n"
+                 "█▒░▒▓   ▓▒░▒█ █▒░▒▓   ▓▒░▒█\n"
+                 "█░ ░▓   ▓░ ░█ █░ ░▓   ▓░ ░█\n"
+                 "██ ░░   ░░ ██  █ ░▒ ▄ ▒░ ██\n"
+                 "▄▄▀▄▄   ▄▄▀▄▄   ▀▄▄▄■▄■░█░█\n"
+                 "                  ▄▄  █▒█▒█\n"
+                 "                ▄▄▀▀▄▄▄▓▄▀█\n"
+                 "                 ▀  ▀▀▀▀▀▀ \033[0m\n";
+  fputs(ngLogo, stdout);
   int opt;
-  // different from optind. the index of each longopt in the loop
   int longind;
 
   const struct option longopts[] = {{"help", no_argument, NULL, 'h'},
@@ -51,6 +62,6 @@ void help() {
       "\n"
       "EXTRA:\n"
       "	-h or --help	Brings up help message\n";
-  printf("%s", help);
+  printf("%s\n", help);
   exit(0);
 }

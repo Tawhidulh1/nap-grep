@@ -1,3 +1,8 @@
+<p align="center">
+  <img alt="image" src="https://github.com/user-attachments/assets/968d032b-562d-454c-b5bf-5f6479d4a2d6" />
+</p>
+
+
 # nap-grep
 nap-grep is a tool that recursively searches directories and looks for a pattern. This tool is very very similar to [repgrep](https://github.com/BurntSushi/ripgrep), well actually it was made to be my own version of it.
 Anyways, expect slower searches than repgrep.
