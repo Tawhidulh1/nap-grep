@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -50,11 +51,19 @@ int search_for_files_containing(char *str, char *directory) {
 
     char path[4096];
     snprintf(path, sizeof(path), "%s/%s", directory, dirp->d_name);
-    // Update this later:
     if (dirp->d_type == DT_DIR) {
       search_for_files_containing(str, path);
       dirp = readdir(workingDir);
       continue;
+    }
+    if (dirp->d_type == DT_UNKNOWN || dirp->d_type == DT_DIR) {
+      struct stat stat;
+      lstat(path, &stat);
+      if (S_ISDIR(stat.st_mode)) {
+        search_for_files_containing(str, path);
+        dirp = readdir(workingDir);
+        continue;
+      }
     }
 
     FILE *fp;
