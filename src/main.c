@@ -17,11 +17,14 @@ int main(int argc, char *argv[]) {
                  "                  ▄▄  █▒█▒█\n"
                  "                ▄▄▀▀▄▄▄▓▄▀█\n"
                  "                 ▀  ▀▀▀▀▀▀ \033[0m\n";
-  fputs(ngLogo, stdout);
+
   int opt;
   int longind;
 
+  int amountSleep = 0;
+
   const struct option longopts[] = {{"help", no_argument, NULL, 'h'},
+                                    {"sleep", no_argument, &amountSleep, 1},
                                     {"hidden", no_argument, &hideDotfiles, 0}};
   while ((opt = getopt_long(argc, argv, "h", longopts, &longind)) != -1) {
     switch (opt) {
@@ -30,6 +33,8 @@ int main(int argc, char *argv[]) {
       break;
     }
   }
+  fputs(ngLogo, stdout);
+  sleep(amountSleep);
   int numDirs = argc - optind - 1;
   char **dirs = &argv[optind + 1];
 
@@ -61,7 +66,9 @@ void help() {
       "	<DIRS>		A(n)(optional) directory to search in\n"
       "\n"
       "EXTRA:\n"
-      "	-h or --help	Brings up help message\n";
+      "	-h or --help	Brings up help message\n"
+      "	--sleep	Makes the program sleep during start to show logo, does not "
+      "work during help flag/option\n";
   printf("%s\n", help);
   exit(0);
 }
