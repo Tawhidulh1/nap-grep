@@ -5,6 +5,8 @@
 #include <string.h>
 
 #define RED "\033[31m"
+#define GREEN "\033[32m"
+
 #define RESET "\033[0m"
 
 int hideDotfiles = 1;
@@ -45,6 +47,7 @@ int search_for_files_containing(char *str, char *directory) {
       dirp = readdir(workingDir);
       continue;
     }
+
     char path[4096];
     snprintf(path, sizeof(path), "%s/%s", directory, dirp->d_name);
     // Update this later:
@@ -61,11 +64,15 @@ int search_for_files_containing(char *str, char *directory) {
     }
 
     char line[1024];
+    int printedPath = 0;
     while (fgets(line, sizeof(line), fp) != NULL) {
       char *pChar = strstr(line, str);
       if (pChar != NULL) {
         char *pLine = line;
-        printf("%s: ", path);
+        if (!printedPath) {
+          printf(GREEN "%s:" RESET "\n", path);
+          printedPath = 1;
+        }
         printWithHighlight(line, pChar - pLine,
                            (pChar - pLine) + strlen(str) - 1, RED);
       }
