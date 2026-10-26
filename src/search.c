@@ -9,8 +9,7 @@
 
 int hideDotfiles = 1;
 
-int search(char *str, char **dirs, int numDirs, int dotfilesHidden) {
-  hideDotfiles = dotfilesHidden;
+int search(char *str, char **dirs, int numDirs) {
   if (numDirs == 0) {
     search_for_files_containing(str, ".");
     return 0;
